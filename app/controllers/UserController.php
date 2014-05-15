@@ -2,26 +2,32 @@
 
 class UserController extends BaseController {
 
-  public function postIndex() {
+  public function store() {
     $user_info = array(
       'username' => Input::get('username'),
       'firstname' => Input::get('firstname'),
       'lastname' => Input::get('lastname'),
-      'password' => Input::get('password'),
-      'email' => Input::get('email')
+      'email' => Input::get('email'),
+      'password' => Input::get('password')
     );
 
-    $validator = Validator::make($user_info, User::$validates);
-    if($validator->fails())
-      return Redirect::route('start')->with(array('signup_attempt' => $user_info, 'messages' => $validator->messages()->all()));
+    $status = User::validates($user_info);
+    $messages = array();
 
-    $password = Hash::make($user_info['password']);
-    
-    $user = User::create(array_except($user_info, 'password'));
-    $user->password = $password;
-    $user->save();
-    Auth::loginUsingId($user->id);
-    return Redirect::route('start');
+    if(!is_array($status)) {
+      $user = new User;
+      $user->firstname = $user_info['firstname'];
+      $user->lastname = $user_info['lastname'];
+      $user->username = $user_info['username'];
+      $user->email = $user_info['email'];
+      $user->password = Hash::make($user_info['password']);
+      $user->save();
+      Auth::loginUsingId($user->id);
+    } else {
+      $messages = $status;
+    }
+
+    return Redirect::route('start')->with(array('signup_attempt' => $user_info, 'messages' => $messages));
   }
 
 }

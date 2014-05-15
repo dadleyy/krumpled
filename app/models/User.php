@@ -3,7 +3,7 @@
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class User extends Eloquent implements UserInterface, RemindableInterface {
+class User extends ValidatedModel implements UserInterface, RemindableInterface {
 
   protected $table = 'users';
 
@@ -19,6 +19,16 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     'password' => 'required|min:6|max:20'
   );
 
+  /* ORM */
+  public function bankAccounts() {
+    return $this->hasMany('BankAccount');
+  }
+
+  public function income() {
+    return $this->hasMany('Income');
+  }
+
+  /* functions */
   public function getAuthIdentifier() {
     return $this->getKey();
   }

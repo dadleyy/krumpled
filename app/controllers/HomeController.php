@@ -8,4 +8,8 @@ class HomeController extends BaseController {
     return View::make('home.start');
   }
 
+  public function dashboardPage() {
+    return View::make('home.dashboard');
+  }
+
 }

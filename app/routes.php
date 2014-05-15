@@ -1,10 +1,23 @@
 <?php
 
-Route::get('/', array('as' => 'start', 'uses' => 'HomeController@startPage'));
+Route::get('/', array('as' => 'start', 'uses' => 'HomeController@startPage', 'before' => 'guest'));
+Route::get('/dashboard', array('as' => 'dashboard', 'uses' => 'HomeController@dashboardPage', 'before' => 'auth'));
 
-Route::post('/signup', 'UserController@postIndex');
-Route::controller('users', 'UserController');
+Route::controller('admin', 'AdminController');
 
-Route::controller('sessions', 'SessionController');
-Route::post('/login', 'SessionController@postIndex');
-Route::get('/logout', 'SessionController@deleteIndex');
+Route::resource('users', 'UserController', array(
+  'except' => array('index', 'create', 'show', 'edit')
+));
+Route::post('/signup', 'UserController@store');
+
+Route::resource('sessions', 'SessionController', array(
+  'except' => array('index', 'create', 'show', 'edit', 'update')
+));
+Route::post('/login', 'SessionController@store');
+Route::get('/logout', array('as' => 'logout', 'uses' => 'SessionController@destroy'));
+
+Route::post('/bankaccounts/{id}/delete', 'BankAccountsController@destroy');
+Route::resource('bankaccounts', 'BankAccountsController', array(
+  'except' =>  array('index', 'create', 'show', 'edit')
+));
+
