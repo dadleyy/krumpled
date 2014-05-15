@@ -1,0 +1,14 @@
+{
+  "name": "krumpled",
+  "version": "0.0.0",
+  "description": "a website to manage finances",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dadleyy/krumpled.git"
+  },
+  "author": "Danny Hadley <danny@dadleyy.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^0.4.5"
+  }
+}
