@@ -6,6 +6,8 @@
   <link href="/css/app.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-  @yield('content')
+  <div class="oc">
+    @yield('content')
+  </div>
 </body>
 </html>
