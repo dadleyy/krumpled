@@ -9,6 +9,8 @@
   "author": "Danny Hadley <danny@dadleyy.com>",
   "license": "ISC",
   "devDependencies": {
-    "grunt": "^0.4.5"
+    "grunt": "^0.4.5",
+    "grunt-contrib-sass": "^0.7.3",
+    "node-neat": "^1.3.0"
   }
 }
