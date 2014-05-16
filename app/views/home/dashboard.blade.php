@@ -54,8 +54,22 @@ $add_attempt = Session::get('add_attempt');
           <li>
           </li>
         @endforeach
-        <ul>
+        </ul>
       @endif
+      <p>add new</p>
+      {{ Form::model(new Income, array('route' => 'income.store')) }}
+      <div>
+        <p>amount:</p>
+        <input type="text" name="amount" />
+      </div>
+      <div>
+        <p>repeats (days):</p>
+        <input type="text" name="amount" />
+      </div>
+      <div>
+        <input type="submit" name="submit" />
+      </div>
+      {{ Form::close() }}
     </div>
   </div>
 </div>

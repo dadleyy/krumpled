@@ -21,3 +21,8 @@ Route::resource('bankaccounts', 'BankAccountsController', array(
   'except' =>  array('index', 'create', 'show', 'edit')
 ));
 
+Route::resource('income', 'IncomeController', array(
+  'except' =>  array('index', 'create', 'show', 'edit')
+));
+
+
