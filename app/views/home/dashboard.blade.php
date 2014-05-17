@@ -5,7 +5,7 @@ $add_attempt = Session::get('add_attempt');
 ?>
 @section('content')
 <div class="page view start oc">
-  <a href="/logout">logout</a>
+  <a href="{{ route('logout') }}">logout</a>
   <div class="oc">
     <div class="user-info hw">
       <h1>User info</h1>
