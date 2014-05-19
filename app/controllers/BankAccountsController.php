@@ -12,7 +12,6 @@ class BankAccountsController extends BaseController {
       'balance' => Input::get('balance')
     );
 
-    $current_user = Auth::user();
     $status = BankAccount::validates($account_info);
     Log::info('Creating bank account: name[' . $account_info['nickname'] . ']');
 
@@ -21,12 +20,12 @@ class BankAccountsController extends BaseController {
       $account = new BankAccount;
       $account->nickname = $account_info['nickname'];
       $account->balance = $account_info['balance'];
-      $current_user->bankAccounts()->save($account);
+      Auth::user()->bankAccounts()->save($account);
     } else {
       $messages = $status;
     }
 
-    return Redirect::to('dashboard')->with(array(
+    return Redirect::route('dashboard')->with(array(
       'add_attempt' => $account_info,
       'messages' => $messages
     ));

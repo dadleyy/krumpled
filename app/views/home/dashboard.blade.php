@@ -7,6 +7,15 @@ $add_attempt = Session::get('add_attempt');
 <div class="page view start oc">
   <a href="{{ route('logout') }}">logout</a>
   <div class="oc">
+    <div class="hw">
+    @if(Session::get('messages'))
+    @foreach(Session::get('messages') as $message)
+    <p>{{ $message }}</p>
+    @endforeach
+    @endif
+    </div>
+  </div>
+  <div class="oc">
     <div class="user-info hw">
       <h1>User info</h1>
       <p>{{ Auth::user()->firstname }}</p>
@@ -30,7 +39,7 @@ $add_attempt = Session::get('add_attempt');
         </ul>
       @endif
       <p>add new</p>
-      <form action="/bankaccounts" method="POST">
+      {{ Form::model(new BankAccount, array('route' => 'bankaccounts.store')) }}
         <div>
           <p>nickname</p>
           <input type="text" name="nickname" />
@@ -42,7 +51,7 @@ $add_attempt = Session::get('add_attempt');
         <div>
           <input type="submit" name="submit" />
         </div>
-      </form>
+      {{ Form::close() }}
     </div>
   </div>
   <div class="oc">
@@ -52,6 +61,7 @@ $add_attempt = Session::get('add_attempt');
         <ul>
         @foreach(Auth::user()->income()->get() as $income_source)
           <li>
+            <p>amount: {{ $income_source->amount; }} | repeats: {{ $income_source->repeats; }} | stated: {{ $income_source->start_date; }}</p>
           </li>
         @endforeach
         </ul>
@@ -64,7 +74,11 @@ $add_attempt = Session::get('add_attempt');
       </div>
       <div>
         <p>repeats (days):</p>
-        <input type="text" name="amount" />
+        <input type="text" name="repeats" />
+      </div>
+      <div>
+        <p>start on:</p>
+        <input type="date" name="start" />
       </div>
       <div>
         <input type="submit" name="submit" />
