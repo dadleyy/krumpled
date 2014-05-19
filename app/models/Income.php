@@ -12,4 +12,8 @@ class Income extends ValidatedModel {
     'start_date' => 'required|date',
   );
 
+  public function distributions() {
+    return $this->belongsToMany('BankAccount')->withPivot('ratio');
+  }
+
 }

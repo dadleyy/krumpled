@@ -81,6 +81,14 @@ $add_attempt = Session::get('add_attempt');
         <input type="date" name="start" />
       </div>
       <div>
+        <p>desposits into:</p>
+        <select name="bank_accounts[1]">
+          @foreach(Auth::user()->bankAccounts()->get() as $bank_account)
+          <option name="{{ $bank_account->nickname }}">{{ $bank_account->nickname }}</option>
+          @endforeach
+        </select>
+      </div>
+      <div>
         <input type="submit" name="submit" />
       </div>
       {{ Form::close() }}
