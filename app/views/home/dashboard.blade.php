@@ -62,6 +62,12 @@ $add_attempt = Session::get('add_attempt');
         @foreach(Auth::user()->income()->get() as $income_source)
           <li>
             <p>amount: {{ $income_source->amount; }} | repeats: {{ $income_source->repeats; }} | stated: {{ $income_source->start_date; }}</p>
+            <p>accounts:</p>
+            <p>
+              @foreach($income_source->distributions()->get() as $account)
+              <small>{{ $account->nickname }}</small>
+              @endforeach
+            </p>
           </li>
         @endforeach
         </ul>
@@ -82,11 +88,13 @@ $add_attempt = Session::get('add_attempt');
       </div>
       <div>
         <p>desposits into:</p>
-        <select name="bank_accounts[1]">
+        <select name="bank_accounts[0][name]">
           @foreach(Auth::user()->bankAccounts()->get() as $bank_account)
           <option name="{{ $bank_account->nickname }}">{{ $bank_account->nickname }}</option>
           @endforeach
         </select>
+        <p>Amount:</p>
+        <input type="text" name="bank_accounts[0][amount]" />
       </div>
       <div>
         <input type="submit" name="submit" />
