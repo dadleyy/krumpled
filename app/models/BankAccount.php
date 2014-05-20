@@ -14,4 +14,8 @@ class BankAccount extends ValidatedModel {
     'balance' => 'required|numeric'
   );
 
+  public function incomeSources() {
+    return $this->hasManyThrough('BankAccount', 'Income', 'bank_account_id', 'income_id');
+  }
+
 }
