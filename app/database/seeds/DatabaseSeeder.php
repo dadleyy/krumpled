@@ -2,16 +2,16 @@
 
 class DatabaseSeeder extends Seeder {
 
-	/**
-	 * Run the database seeds.
-	 *
-	 * @return void
-	 */
-	public function run()
-	{
-		Eloquent::unguard();
+  private $seeds = array(
+    'UserTableSeeder',
+    'BankAccountTypeTableSeeder'
+  );
 
-		// $this->call('UserTableSeeder');
-	}
+  public function run() {
+    Eloquent::unguard();
+    foreach($this->seeds as $seed_class) {
+      $this->call($seed_class);
+    }
+  }
 
 }
