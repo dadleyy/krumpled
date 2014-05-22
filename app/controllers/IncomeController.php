@@ -24,7 +24,7 @@ class IncomeController extends BaseController {
         DB::table('bank_account_income')->insert(array(
           'bank_account_id' => $account->id,
           'income_id' => $income->id,
-          'ratio' => 1.0
+          'ratio' => $income->amount / $account_config['amount']
         ));
       }
     } else {
